@@ -1,0 +1,62 @@
+﻿AppType=JavaFX
+Build1=Default,com.application.bananoionic
+File1=bootstrap-grid.min.css
+File2=dayjs.min.js
+File3=html.min.css
+File4=numeral.min.js
+FileGroup1=Default Group
+FileGroup2=Default Group
+FileGroup3=Default Group
+FileGroup4=Default Group
+Group=Default Group
+Library1=jcore
+Library2=jfx
+Library3=banano
+Module1=HTMLApp
+Module2=HTMLElement
+Module3=HTMLShared
+NumberOfFiles=4
+NumberOfLibraries=3
+NumberOfModules=3
+Version=8.5
+@EndOfDesignText@
+
+#IgnoreWarnings: 16, 10, 14, 15	
+#Region Project Attributes 
+	#MergeLibraries: True
+	#LibraryAuthor: Anele Mashy Mbanga
+	#LibraryName: BANanoHTML
+#End Region
+
+Sub Process_Globals
+	Public BANano As BANano 'ignore
+	Public AppName As String = "BANanoHTML"
+	Public Version As String = "1.0"
+End Sub
+
+Sub AppStart (Form1 As Form, Args() As String)
+	'initialize banano for first use
+	BANano.Initialize("BANano", AppName, Version)
+	BANano.Header.Title = AppName
+	
+	BANano.Header.AddJavascriptFile("dayjs.min.js")
+	BANano.Header.AddJavascriptFile("numeral.min.js")
+	BANano.Header.AddCSSFile("html.min.css")
+	BANano.Header.AddCSSFile("bootstrap-grid.min.css")
+	' start the build
+	#if release
+	BANano.BuildAsB4Xlib(Version)
+	#else
+	BANano.Build(File.DirApp)
+	#end if
+	ExitApplication
+End Sub
+
+'Return true to allow the default exceptions handler to handle the uncaught exception.
+Sub Application_Error (Error As Exception, StackTrace As String) As Boolean
+	Return True
+End Sub
+
+Sub BANano_Ready
+	
+End Sub
